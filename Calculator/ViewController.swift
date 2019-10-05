@@ -1,9 +1,4 @@
-//
-//  ViewController.swift
-//  Calculator
-//
-//  Created by Angela Yu on 10/09/2018.
-//  Copyright © 2018 London App Brewery. All rights reserved.
+
 //
 
 import UIKit
@@ -12,7 +7,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var displayLabel: UILabel!
     
-    var isFinishedTypingNumber: Bool = true
+    private var isFinishedTypingNumber: Bool = true
     
     
     
@@ -20,6 +15,22 @@ class ViewController: UIViewController {
         
         //What should happen when a non-number button is pressed
         isFinishedTypingNumber = true
+        
+        guard let number = Double(displayLabel.text!) else {
+            fatalError("Cannot convert display label text to a double")
+        }
+        
+        if let calcMethod = sender.currentTitle {
+            if calcMethod == "+/-" {
+                displayLabel.text = String(number * 1)
+            }
+            else if calcMethod == "%" {
+                displayLabel.text = String(number / 100)
+            }
+            else if calcMethod == "AC" {
+                displayLabel.text = "0"
+            }
+        }
     }
 
     
