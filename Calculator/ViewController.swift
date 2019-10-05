@@ -32,15 +32,14 @@ class ViewController: UIViewController {
         
         
         if let calcMethod = sender.currentTitle {
-            if calcMethod == "+/-" {
-                displayValue *= -1
+            let calculator = CalculatorLogic(number: displayValue)
+            
+            guard let result = calculator.Calculate(symbol:calcMethod) else {
+                fatalError("Result of the calculator is nil")
             }
-            else if calcMethod == "%" {
-                displayValue *= 0.01
-            }
-            else if calcMethod == "AC" {
-                displayLabel.text = "0"
-            }
+            
+           displayValue =  result
+            
         }
     }
 
